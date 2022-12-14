@@ -1,0 +1,28 @@
+.input, .main-items, .second-data, .display-second {
+	position: relative;
+	top: 40px;
+	left: 40px;
+	font-size: 20px;
+}
+.aboutday {
+	display: flex;
+	align-items: flex-start;
+	gap: 25px;
+	color: gray;
+	position: relative;
+	top: 40px;
+	left: 40px;
+	font-size: 20px;
+}
+
+.second-data {
+	display: flex;
+	align-items: flex-start;
+	gap: 10px;
+}
+
+.display-second {
+	display: flex;
+	align-items: flex-start;
+	gap: 50px;
+}
