@@ -1,5 +1,5 @@
 import './App.css';
-import Frontapp from './Components/frontApp/frontapp.js'
+import Mainside from './Components/mainside/mainside.js'
 import React, {Component} from 'react'
 
 class App extends Component {
@@ -7,27 +7,37 @@ class App extends Component {
   super(props)
   this.state = {
     data: [],
-    weather: []
+    weather: [],
+    locationState: 'London'
   }
+  this.fetchData = this.fetchData.bind(this)
 }
 
-   componentDidMount() {
-    let location = 'London';
+   fetchData = () => {
     let key = 'fd3b081fa5f1791533d9fa25f99be333';
-    fetch('https://api.openweathermap.org/data/2.5/weather?q=' + location + '&appid=' + key  )
+    fetch('https://api.openweathermap.org/data/2.5/weather?q=' + this.state.locationState + '&appid=' + key  )
     .then(res => res.json())
-    .then(res => this.setState({
-      data: res.main,
-      weather: res.weather
-    }))
-
+    .then(res => { 
+      let newData = this.state.data.concat([res.main]); 
+      let newWeather = this.state.data.concat([res.weather]);  
+      this.setState({
+        data: newData,
+        weather: newWeather
+    })})
   }
+
+   componentDidMount() {
+      this.fetchData()
+    }
+
   render() {
-    let array = Array.from(this.state.data)
-    return array.map((item) => {
-      <h1>{item}</h1>
-    })}
-   
+    return (
+      <div className="App">
+        <Mainside data={this.state.data}/>
+
+      </div>
+      )
+   }
 }
 
 export default App;

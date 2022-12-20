@@ -1,9 +1,13 @@
 import React from 'react';
-import './frontapp.css';
+import './mainside.css';
 
-const Frontapp = () => {
-  return (        
-          <div className="container">
+const Mainside = ({data}) => {
+  return (     
+      <>
+      { data.map((main, i) => {
+
+        return (
+          <div className="container" key={i}>
             <div className="input">
               <label for="fname">Your city is:  </label>
               <input type="search" id="fname" name="fname"/>
@@ -16,7 +20,7 @@ const Frontapp = () => {
             </div>
             <div className="main-items">
               <img/>
-              <h1> Temp</h1>
+              <h1>The temperature is {main.temp - 273.20} C</h1>
               <p> Cloudly </p>
             </div>
 
@@ -29,8 +33,13 @@ const Frontapp = () => {
               <p> 19.2 km/j</p>
             </div> 
           </div>
-      
+          )
+      })
+          
+        }
+      </>
+
   );
 }
 
-export default Frontapp;
+export default Mainside;
