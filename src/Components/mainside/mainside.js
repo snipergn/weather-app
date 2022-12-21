@@ -1,16 +1,15 @@
 import React from 'react';
 import './mainside.css';
 
-const Mainside = ({data}) => {
+const Mainside = ({data, handleChange, value }) => {
   return (     
       <>
-      { data.map((main, i) => {
-
+      { data.map((main, index) => {
         return (
-          <div className="container" key={i}>
+          <div className="container" key={index}>
             <div className="input">
               <label for="fname">Your city is:  </label>
-              <input type="search" id="fname" name="fname"/>
+              <input type="search" id="fname" name="fname" value={value} onChange={handleChange} />
             </div>
             <div className="aboutday">
                <p> Hours </p>
@@ -20,12 +19,12 @@ const Mainside = ({data}) => {
             </div>
             <div className="main-items">
               <img/>
-              <h1>The temperature is {main.temp - 273.20} C</h1>
+              <h1>The temperature is {main.temp} C</h1>
               <p> Cloudly </p>
             </div>
 
             <div className="second-data">
-              <p> Humudity </p> <br/>
+              <p> Humidity Level is {main.humidity}% </p> <br/>
               <p> Wind Speed </p>
             </div>
             <div className="display-second">
