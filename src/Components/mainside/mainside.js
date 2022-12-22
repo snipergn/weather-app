@@ -1,16 +1,25 @@
-import React from 'react';
+import React, { Component } from 'react';
 import './mainside.css';
 
-const Mainside = ({data, handleChange, value }) => {
+class Mainside extends Component  {
+
+  
+
+  render() {
+    console.log(this.props.locationState)
   return (     
       <>
-      { data.map((main, index) => {
+      { this.props.data.map((main, index) => {
         return (
           <div className="container" key={index}>
+          <form>
             <div className="input">
               <label for="fname">Your city is:  </label>
-              <input type="search" id="fname" name="fname" value={value} onChange={handleChange} />
+              <input type="text" id="fname" name="fname" 
+              onChange={this.handleNameChange} 
+              value={this.props.locationState} />
             </div>
+          </form>
             <div className="aboutday">
                <p> Hours </p>
                <p> Day </p>
@@ -38,7 +47,8 @@ const Mainside = ({data, handleChange, value }) => {
         }
       </>
 
-  );
+    );
+  }
 }
 
 export default Mainside;

@@ -4,7 +4,7 @@
 	left: 40px;
 	font-size: 20px;
 }
-.aboutday {
+.aboutday, .button {
 	display: flex;
 	align-items: flex-start;
 	gap: 25px;
@@ -25,4 +25,16 @@
 	display: flex;
 	align-items: flex-start;
 	gap: 50px;
+}
+
+.button {
+	padding: 5px;
+	background-color: gray;
+	color: white;
+	margin-top: 20px;
+	
+}
+.button:hover {
+	background-color: white;
+	color: black;
 }

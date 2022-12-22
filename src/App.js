@@ -8,13 +8,16 @@ class App extends Component {
   this.state = {
     data: [],
     weather: [],
-    locationState: 'London'
+    locationState: 'Bucharest'
   }
+  this.handleNameChange = this.handleNameChange.bind(this);
 }
 
 componentDidMount() {
     let key = 'fd3b081fa5f1791533d9fa25f99be333';
-    fetch('https://api.openweathermap.org/data/2.5/weather?q=' + this.state.locationState + '&appid=' + key +'&units=metric' )
+    fetch('https://api.openweathermap.org/data/2.5/weather?q=' +
+     this.state.locationState + '&appid=' + key +'&units=metric' )
+
     .then(res => res.json())
     .then(res => { 
       let newData = this.state.data.concat([res.main]);
@@ -27,16 +30,17 @@ componentDidMount() {
   }
 
 
-    fetchLocation = (e) => {     
-        this.setState({locationState: e.target.value})
-    
-    }
+  handleNameChange = (event) => {
+    this.setState({ locationState: event.target.value })
+  }
 
   render() {
-    let fetchLocStore = this.fetchLocation.bind(this)
     return (
       <div className="App">
-        <Mainside data={this.state.data} handleChange={fetchLocStore} value = {this.locationState}/>
+        <Mainside 
+        data={this.state.data} 
+        name={this.state.locationState} 
+        onNameChange={this.handleNameChange}/>
 
       </div>
       )
