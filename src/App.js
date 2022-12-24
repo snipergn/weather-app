@@ -19,6 +19,7 @@ class App extends Component {
     this.handleGeolocation = this.handleGeolocation.bind(this);
   }
 
+  
   onChangeHandler(event) {
     this.setState({
       locationState: event.target.value,
@@ -32,6 +33,7 @@ class App extends Component {
   }
 
   handleLocation = () => {
+    
     const key = "fd3b081fa5f1791533d9fa25f99be333";
     const url = 'http://api.openweathermap.org/data/2.5/'
     fetch(
@@ -43,35 +45,55 @@ class App extends Component {
       + "&units=metric"
     )
       .then((res) => res.json())
-      .then((res) => {
-        let newData = this.state.data.concat([res.main]);
-        let newWeather = this.state.data.concat([res.weather]);
-        let newWindRes = this.state.data.concat([res.wind]);
-        let filter = newData.filter((filtred) => res.main === filtred);
-        let filterWeather = newWeather.filter((filtred) => res.weather === filtred);
-        let filtredWind = newWindRes.filter((filtred) => filtred === res.wind)
+      .then(res => {
+        const newData = this.state.data.concat([res.main]);
+        const newWeather = this.state.data.concat([res.weather]);
+        const newWindRes = this.state.data.concat([res.wind]);
+        const filter = newData.filter((filtred) => res.main === filtred);
+        const filterWeather = newWeather.filter((filtred) => res.weather === filtred);
+        const filtredWind = newWindRes.filter((filtred) => filtred === res.wind)
         const iconName = filterWeather.map(item => item[0].icon)
-        let iconurl = "http://openweathermap.org/img/w/" + iconName + ".png";
+        const iconurl = "http://openweathermap.org/img/w/" + iconName + ".png";
         this.setState({
           data: filter,
           weather: filterWeather,
           wind: filtredWind,
           icon: iconurl
         });
-      });
+      })
+      .catch(err => console.log('Some error here with API Location'));
   };
   handleGeolocation = () => {
-    navigator.geolocation.getCurrentPosition(function(position) {
-      console.log("Latitude is :", position.coords.latitude);
-      console.log("Longitude is :", position.coords.longitude);
+    navigator.geolocation.getCurrentPosition(position => {  
+    const API_KEY = "AIzaSyDi9z0r02RbC16GjL-d2qufFe6gwhYgW14";
+    const lat = position.coords.latitude;
+    const lng =  position.coords.longitude;
+    const url = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&key=${API_KEY}`;
+    fetch(url)
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        let address = data.results[0].formatted_address;
+        address = address.substring(8)
+        this.setState({
+          locationState: address
+        })
+      })
+      .catch(error => {
+        console.error(error);
+      });
     });
-
+    
+    
   }
 
   componentDidMount() {
     this.handleLocation();
     this.handleGeolocation();
   }
+
+
   
   render() {
     return (
@@ -80,6 +102,7 @@ class App extends Component {
         data={this.state.data} 
         weather={this.state.weather} 
         wind = {this.state.wind}
+        locationState = {this.state.locationState}
         icon = {this.state.icon}
         onSubmit = {this.onSubmitHandler.bind(this)}
         onChangeEvent = {this.onChangeHandler.bind(this)}

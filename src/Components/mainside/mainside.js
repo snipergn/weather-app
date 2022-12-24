@@ -1,22 +1,14 @@
 import React from "react";
 import "./mainside.css";
 
-const Mainside = ({data, weather, wind, icon, locationState, onChangeEvent, onSubmit}) => {
+const Mainside = ({data, weather, wind, icon, locationState, onChangeEvent, onSubmit,}) => {
 
     const date = new Date();
-    const hoursnow = date.getHours() + " " + date.getMinutes() + " PM";
-    const datenow =
-      date.getDate() + "." + date.getUTCMonth() + "." + date.getFullYear();
-    const weekday = new Array(7);
-      weekday[0] = "Sunday";
-      weekday[1] = "Monday";
-      weekday[2] = "Tuesday";
-      weekday[3] = "Wednesday";
-      weekday[4] = "Thursday";
-      weekday[5] = "Friday";
-      weekday[6] = "Saturday";
+    const hoursnow = date.toLocaleTimeString();
+    const datenow = date.toLocaleDateString()
+    const weekday = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
     const daynow = weekday[date.getDay()];
-  let temperature = Math.round(data.map((item) => item.temp))
+    const temperature = Math.round(data.map((item) => item.temp))
  
     return (
       <div>
@@ -55,12 +47,12 @@ const Mainside = ({data, weather, wind, icon, locationState, onChangeEvent, onSu
               {wind.map((item) => {
                 return (
                   <div className="second-data" key={item.id}>
-                    <p> Humidity Level is </p>
+                    <p> Humidity </p>
                     <br />
                     <span> {main.humidity}%</span>
-                    <p> Wind Speed is </p>
+                    <p> Wind Speed </p>
                     <br />
-                    <span>{item.speed} km/j</span>
+                    <span>{item.speed} km/h</span>
                   </div>
                 );
               })}
