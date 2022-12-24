@@ -2,19 +2,22 @@ import React from "react";
 import "./mainside.css";
 
 const Mainside = ({data, weather, wind, icon, locationState, onChangeEvent, onSubmit}) => {
-  const date = new Date();
-  const hoursnow = date.getHours() + ' ' + date.getMinutes();
-  const datenow = date.getDate() + '.' + date.getUTCMonth() + '.' + date.getFullYear();
-  const weekday=new Array(7);
-  weekday[0]="Sunday";
-  weekday[1]="Monday";
-  weekday[2]="Tuesday";
-  weekday[3]="Wednesday";
-  weekday[4]="Thursday";
-  weekday[5]="Friday";
-  weekday[6]="Saturday";
 
-  const daynow = weekday[date.getDay()]
+    const date = new Date();
+    const hoursnow = date.getHours() + " " + date.getMinutes() + " PM";
+    const datenow =
+      date.getDate() + "." + date.getUTCMonth() + "." + date.getFullYear();
+    const weekday = new Array(7);
+      weekday[0] = "Sunday";
+      weekday[1] = "Monday";
+      weekday[2] = "Tuesday";
+      weekday[3] = "Wednesday";
+      weekday[4] = "Thursday";
+      weekday[5] = "Friday";
+      weekday[6] = "Saturday";
+    const daynow = weekday[date.getDay()];
+  let temperature = Math.round(data.map((item) => item.temp))
+ 
     return (
       <div>
         <div className="formData">
@@ -30,7 +33,8 @@ const Mainside = ({data, weather, wind, icon, locationState, onChangeEvent, onSu
             <input type="submit" value="Submit" />
           </form>
         </div>
-        {data.map((main, index) => {
+        {
+        data.map((main, index) => {
           return (
             <div className="container" key={index}>
               <div className="aboutday">
@@ -42,7 +46,7 @@ const Mainside = ({data, weather, wind, icon, locationState, onChangeEvent, onSu
                 return (
                   <div className="main-items" key={item.id}>
                     <img className="photo" alt="weather" src={icon} />
-                    <h1>The temperature is {main.temp} C</h1>
+                    <h1>The temperature is {temperature} C</h1>
                     <p> {item[0].main} </p>
                   </div>
                 );
@@ -61,7 +65,9 @@ const Mainside = ({data, weather, wind, icon, locationState, onChangeEvent, onSu
               })}
             </div>
           );
-        })}
+        })
+        
+        }
       </div>
     );
   }
