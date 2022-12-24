@@ -27,14 +27,7 @@
 	gap: 50px;
 }
 
-.button {
-	padding: 5px;
-	background-color: gray;
-	color: white;
-	margin-top: 20px;
-	
-}
-.button:hover {
-	background-color: white;
-	color: black;
+.photo {
+	width: 100x;
+	height: 100px;
 }

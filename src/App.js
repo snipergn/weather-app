@@ -8,73 +8,73 @@ class App extends Component {
     this.state = {
       data: [],
       weather: [],
+      wind: [],
+      icon: '',
       locationState: "Bucharest",
     };
-    this.onSubmitHandler = this.onSubmitHandler.bind(this)
-    this.handleLocation = this.handleLocation.bind(this)
+
+    this.onSubmitHandler = this.onSubmitHandler.bind(this);
+    this.handleLocation = this.handleLocation.bind(this);
     this.onChangeHandler = this.onChangeHandler.bind(this);
   }
-  
 
-  onChangeHandler(event){
+  onChangeHandler(event) {
     this.setState({
-      locationState: event.target.value
-    })
+      locationState: event.target.value,
+    });
   }
 
-  onSubmitHandler(e){
+  onSubmitHandler(e) {
     e.preventDefault();
     let cityName = this.state.locationState;
     this.handleLocation(cityName);
   }
 
-  handleLocation = (value) => {
-    let key = "fd3b081fa5f1791533d9fa25f99be333";
+  handleLocation = () => {
+    const key = "fd3b081fa5f1791533d9fa25f99be333";
+    const url = 'http://api.openweathermap.org/data/2.5/'
     fetch(
-      "https://api.openweathermap.org/data/2.5/weather?q=" +
-        this.state.locationState +
-        "&appid=" +
-        key +
-        "&units=metric"
+      url 
+      + "weather?q=" 
+      + this.state.locationState 
+      + "&appid=" 
+      + key 
+      + "&units=metric"
     )
       .then((res) => res.json())
       .then((res) => {
         let newData = this.state.data.concat([res.main]);
         let newWeather = this.state.data.concat([res.weather]);
+        let newWindRes = this.state.data.concat([res.wind]);
         let filter = newData.filter((filtred) => res.main === filtred);
-        let filterWeather = newWeather.filter(
-          (filtred) => res.weather === filtred
-        );
+        let filterWeather = newWeather.filter((filtred) => res.weather === filtred);
+        let filtredWind = newWindRes.filter((filtred) => filtred === res.wind)
+        const iconName = filterWeather.map(item => item[0].icon)
+        let iconurl = "http://openweathermap.org/img/w/" + iconName + ".png";
         this.setState({
           data: filter,
           weather: filterWeather,
+          wind: filtredWind,
+          icon: iconurl
         });
       });
   };
 
-    componentDidMount() {
-      this.handleLocation()
-    }
+
+  componentDidMount() {
+    this.handleLocation();
+  }
+  
   render() {
     return (
-      <div className="App">
-        <form on onSubmit={this.onSubmitHandler}>
-          <label for="fname">Your city is: </label>
-          <input
-            type="text"
-            id="fname"
-            name="fname"
-            onChange={this.onChangeHandler} 
-            value={this.state.locationState}
-          />
-          <input type="submit" value="Submit" />
-          <br></br>
-          <br></br>
-        </form>
-        <Mainside
-          data={this.state.data}
-          weather={this.state.weather}          
-
+      <div className="App">     
+        <Mainside 
+        data={this.state.data} 
+        weather={this.state.weather} 
+        wind = {this.state.wind}
+        icon = {this.state.icon}
+        onSubmit = {this.onSubmitHandler.bind(this)}
+        onChangeEvent = {this.onChangeHandler.bind(this)}
         />
       </div>
     );
