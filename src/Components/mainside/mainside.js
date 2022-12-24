@@ -45,8 +45,9 @@ const Mainside = ({data, weather, wind, icon, locationState, onChangeEvent, onSu
               {weather.map((item) => {
                 return (
                   <div className="main-items" key={item.id}>
-                    <img className="photo" alt="weather" src={icon} />
-                    <h1>The temperature is {temperature} C</h1>
+                    <img className="photo" alt="weather" src={icon}/>
+                    <h1>temperature <br/></h1>
+                    <p className="temperature">{temperature}°C</p>
                     <p> {item[0].main} </p>
                   </div>
                 );

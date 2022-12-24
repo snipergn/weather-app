@@ -16,6 +16,7 @@ class App extends Component {
     this.onSubmitHandler = this.onSubmitHandler.bind(this);
     this.handleLocation = this.handleLocation.bind(this);
     this.onChangeHandler = this.onChangeHandler.bind(this);
+    this.handleGeolocation = this.handleGeolocation.bind(this);
   }
 
   onChangeHandler(event) {
@@ -59,10 +60,17 @@ class App extends Component {
         });
       });
   };
+  handleGeolocation = () => {
+    navigator.geolocation.getCurrentPosition(function(position) {
+      console.log("Latitude is :", position.coords.latitude);
+      console.log("Longitude is :", position.coords.longitude);
+    });
 
+  }
 
   componentDidMount() {
     this.handleLocation();
+    this.handleGeolocation();
   }
   
   render() {
