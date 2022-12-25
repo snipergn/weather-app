@@ -1,6 +1,5 @@
 import React from "react";
-import "./mainside.css";
-
+import './mainside.css'
 const Mainside = ({data, weather, wind, icon, locationState, onChangeEvent, onSubmit,}) => {
 
     const date = new Date();
@@ -11,11 +10,12 @@ const Mainside = ({data, weather, wind, icon, locationState, onChangeEvent, onSu
     const temperature = Math.round(data.map((item) => item.temp))
  
     return (
-      <div>
-        <div className="formData">
-          <form onSubmit={onSubmit}>
-            <label for="fname">Your city is: </label>
-            <input
+      
+      <div className="container justify-content-center align-items-center align-items-center">
+        <div className="formData ">
+          <form onSubmit={onSubmit} className="input-group input-group-lg mt-5 ">
+            <label className="p-2" for="fname">Your city is: </label>
+            <input className="p-2"
               type="text"
               id="fname"
               name="fname"
@@ -28,31 +28,38 @@ const Mainside = ({data, weather, wind, icon, locationState, onChangeEvent, onSu
         {
         data.map((main, index) => {
           return (
-            <div className="container" key={index}>
-              <div className="aboutday">
-                <p>{hoursnow}</p>
-                <p> {daynow} </p>
-                <p> {datenow} </p>
+            <div key={index}>
+              <div className="d-flex mt-5 ">
+                <p className="col-1">{hoursnow}</p>
+                <p className="col-1"> {daynow} </p>
+                <p className="col-1"> {datenow} </p>
               </div>
-              {weather.map((item) => {
+              { weather.map((item) => {
                 return (
-                  <div className="main-items" key={item.id}>
+                  <div className="main-items d-flex flex-row align-items-center" key={item.id}>
+                    <div>
                     <img className="photo" alt="weather" src={icon}/>
-                    <h1>temperature <br/></h1>
-                    <p className="temperature">{temperature}°C</p>
-                    <p> {item[0].main} </p>
+                    <p className="h3"> {item[0].main} </p>
+                    </div>
+                    <div className="temp">
+                    <p className="h">temperature <br/></p>
+                    <p className="h3">{temperature}°C</p>
+                    </div>
+                    
                   </div>
                 );
               })}
-              {wind.map((item) => {
+              { wind.map((item) => {
                 return (
-                  <div className="second-data" key={item.id}>
+                  <div className="second-data mt-5 d-flex flex-row align-items-center" key={item.id}>
+                  <div>
                     <p> Humidity </p>
-                    <br />
-                    <span> {main.humidity}%</span>
+                    <span className="h3"> {main.humidity}%</span>
+                    </div>
+                    <div>
                     <p> Wind Speed </p>
-                    <br />
-                    <span>{item.speed} km/h</span>
+                    <span className="h3">{item.speed} km/h</span>
+                    </div>
                   </div>
                 );
               })}

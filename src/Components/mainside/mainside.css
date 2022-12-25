@@ -1,38 +1,11 @@
-.input, .main-items, .second-data, .display-second, .formData {
-	position: relative;
-	top: 40px;
-	left: 40px;
-	font-size: 20px;
+.flex-row {
+	gap: 40px;
 }
-.aboutday, .button {
-	display: flex;
-	align-items: flex-start;
-	gap: 25px;
-	color: gray;
-	position: relative;
-	top: 40px;
-	left: 40px;
-	font-size: 20px;
-}
-
-.second-data {
-	display: flex;
-	align-items: flex-start;
-	gap: 10px;
-}
-
-.display-second {
-	display: flex;
-	align-items: flex-start;
-	gap: 50px;
-}
-
 .photo {
-	width: 100x;
+	width: 100px;
 	height: 100px;
 }
 
-.temperature {
-	font-size: 25px;
-	font-weight: 700;
+.temp {
+	padding-top: 50px;
 }
