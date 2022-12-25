@@ -9,7 +9,7 @@ class App extends Component {
       data: [],
       weather: [],
       wind: [],
-      icon: '',
+      icon: "",
       locationState: "Bucharest",
     };
 
@@ -19,7 +19,6 @@ class App extends Component {
     this.handleGeolocation = this.handleGeolocation.bind(this);
   }
 
-  
   onChangeHandler(event) {
     this.setState({
       locationState: event.target.value,
@@ -33,79 +32,78 @@ class App extends Component {
   }
 
   handleLocation = () => {
-    
     const key = "fd3b081fa5f1791533d9fa25f99be333";
-    const url = 'http://api.openweathermap.org/data/2.5/'
+    const url = "http://api.openweathermap.org/data/2.5/";
     fetch(
-      url 
-      + "weather?q=" 
-      + this.state.locationState 
-      + "&appid=" 
-      + key 
-      + "&units=metric"
+      url +
+        "weather?q=" +
+        this.state.locationState +
+        "&appid=" +
+        key +
+        "&units=metric"
     )
       .then((res) => res.json())
-      .then(res => {
+      .then((res) => {
         const newData = this.state.data.concat([res.main]);
         const newWeather = this.state.data.concat([res.weather]);
         const newWindRes = this.state.data.concat([res.wind]);
         const filter = newData.filter((filtred) => res.main === filtred);
-        const filterWeather = newWeather.filter((filtred) => res.weather === filtred);
-        const filtredWind = newWindRes.filter((filtred) => filtred === res.wind)
-        const iconName = filterWeather.map(item => item[0].icon)
+        const filterWeather = newWeather.filter(
+          (filtred) => res.weather === filtred
+        );
+        const filtredWind = newWindRes.filter(
+          (filtred) => filtred === res.wind
+        );
+        const iconName = filterWeather.map((item) => item[0].icon);
         const iconurl = "http://openweathermap.org/img/w/" + iconName + ".png";
         this.setState({
           data: filter,
           weather: filterWeather,
           wind: filtredWind,
-          icon: iconurl
+          icon: iconurl,
         });
       })
-      .catch(err => console.log('Some error here with API Location'));
+      .catch((err) => console.log("Some error here with API Location"));
   };
   handleGeolocation = () => {
-    navigator.geolocation.getCurrentPosition(position => {  
-    const API_KEY = "AIzaSyDi9z0r02RbC16GjL-d2qufFe6gwhYgW14";
-    const lat = position.coords.latitude;
-    const lng =  position.coords.longitude;
-    const url = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&key=${API_KEY}`;
-    fetch(url)
-      .then((response) => {
-        return response.json();
-      })
-      .then((data) => {
-        let address = data.results[0].formatted_address;
-        address = address.substring(8)
-        this.setState({
-          locationState: address
+    navigator.geolocation.getCurrentPosition((position) => {
+      const API_KEY = "AIzaSyDi9z0r02RbC16GjL-d2qufFe6gwhYgW14";
+      const lat = position.coords.latitude;
+      const lng = position.coords.longitude;
+      const url = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&key=${API_KEY}`;
+      fetch(url)
+        .then((response) => {
+          return response.json();
         })
-      })
-      .catch(error => {
-        console.error(error);
-      });
+        .then((data) => {
+          let address = data.results[0].formatted_address;
+          address = address.substring(8);
+          this.setState({
+            locationState: address,
+          });
+        })
+        .catch((error) => {
+          console.error(error);
+        });
     });
-    
-    
-  }
+  };
 
   componentDidMount() {
     this.handleLocation();
     this.handleGeolocation();
   }
 
-
-  
   render() {
     return (
-      <div className="App">     
-        <Mainside 
-        data={this.state.data} 
-        weather={this.state.weather} 
-        wind = {this.state.wind}
-        locationState = {this.state.locationState}
-        icon = {this.state.icon}
-        onSubmit = {this.onSubmitHandler.bind(this)}
-        onChangeEvent = {this.onChangeHandler.bind(this)}
+      <div className="App">
+        <Mainside
+          data={this.state.data}
+          weather={this.state.weather}
+          wind={this.state.wind}
+          locationState={this.state.locationState}
+          icon={this.state.icon}
+          onSubmit={this.onSubmitHandler.bind(this)}
+          onChangeEvent={this.onChangeHandler.bind(this)}
         />
       </div>
     );
