@@ -50,7 +50,7 @@ const Mainside = ({
               <p className="col-1"> {daynow} </p>
               <p className="col-1"> {datenow} </p>
             </div>
-            {weather.map((item) => {
+            { weather.map((item) => {
               return (
                 <div
                   className="main-items d-flex flex-row align-items-center"
@@ -64,12 +64,12 @@ const Mainside = ({
                     <p className="h">
                       temperature <br />
                     </p>
-                    <p className="h3">{main.temp}°C</p>
+                    <p className="h3">{temperature}°C</p>
                   </div>
                 </div>
               );
             })}
-            {wind.map((item) => {
+            { wind.map((item) => {
               return (
                 <div
                   className="second-data mt-5 d-flex flex-row align-items-center"
