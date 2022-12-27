@@ -7,7 +7,6 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      key: "fd3b081fa5f1791533d9fa25f99be333",
       dataForecast: [],
       data: [],
       weather: [],
@@ -32,18 +31,18 @@ class App extends Component {
 
   onSubmitHandler(e) {
     e.preventDefault();
-    let cityName = this.state.locationState;
-    this.handleLocation(cityName);
-    this.handleForecastLocation(cityName)
+    this.handleLocation();
+    this.handleForecastLocation()
   }
 
   handleForecastLocation = () => {
+    const key = 'fd3b081fa5f1791533d9fa25f99be333'
     let cityname = this.state.locationState
     const url =
     "https://api.openweathermap.org/data/2.5/forecast?q=" +
       cityname +
       "&appid=" +
-      this.state.key + 
+      key + 
       "&units=metric";
       fetch(url)
       .then((res) => res.json())
@@ -58,11 +57,12 @@ class App extends Component {
   }
 
   handleLocation = () => {
+    const key = 'fd3b081fa5f1791533d9fa25f99be333'
     const url =
       "http://api.openweathermap.org/data/2.5/weather?q=" +
       this.state.locationState +
       "&appid=" +
-      this.state.key +
+      key +
       "&units=metric";
     fetch(url)
       .then((res) => res.json())
@@ -90,7 +90,7 @@ class App extends Component {
   };
   handleGeolocation = () => {
     navigator.geolocation.getCurrentPosition((position) => {
-      const API_KEY = this.state.key;
+      const API_KEY ='fd3b081fa5f1791533d9fa25f99be333';
       const lat = position.coords.latitude;
       const lng = position.coords.longitude;
       const url = `http://api.openweathermap.org/geo/1.0/reverse?lat=${lat}&lon=${lng}&limit=1&appid=${API_KEY}`;
