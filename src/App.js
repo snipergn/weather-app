@@ -7,11 +7,13 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      key: "fd3b081fa5f1791533d9fa25f99be333",
       dataForecast: [],
       data: [],
       weather: [],
       wind: [],
       icon: "",
+      iconForecast: "",
       locationState: "Bucharest",
     };
 
@@ -35,12 +37,11 @@ class App extends Component {
   }
 
   handleForecastLocation = () => {
-    const key = "fd3b081fa5f1791533d9fa25f99be333";
     const url =
     "https://api.openweathermap.org/data/2.5/forecast?q=" +
       this.state.locationState +
       "&appid=" +
-      key + 
+      this.state.key + 
       "&units=metric";
       fetch(url)
       .then((res) => res.json())
@@ -48,19 +49,23 @@ class App extends Component {
         let forescastday = this.state.dataForecast.concat([res.list])
         let filterforecast = forescastday.filter((filtred) => filtred === res.list)
         console.log(filterforecast)
+        // #1 Set to Icon Forecast Only Item property.
+            // #1 SetState only for item
+        // #2 Move iconUrl to SecondSide for each elements
+        // #3 Display Data For each card in Secondside component.
+        // const iconurl = "http://openweathermap.org/img/w/" + iconName + ".png";
         this.setState({
-          dataForecast: filterforecast
+          dataForecast: filterforecast,
         })
       })
   }
 
   handleLocation = () => {
-    const key = "fd3b081fa5f1791533d9fa25f99be333";
     const url =
       "http://api.openweathermap.org/data/2.5/weather?q=" +
       this.state.locationState +
       "&appid=" +
-      key +
+      this.state.key +
       "&units=metric";
     fetch(url)
       .then((res) => res.json())
@@ -88,7 +93,7 @@ class App extends Component {
   };
   handleGeolocation = () => {
     navigator.geolocation.getCurrentPosition((position) => {
-      const API_KEY = "fd3b081fa5f1791533d9fa25f99be333";
+      const API_KEY = this.state.key;
       const lat = position.coords.latitude;
       const lng = position.coords.longitude;
       const url = `http://api.openweathermap.org/geo/1.0/reverse?lat=${lat}&lon=${lng}&limit=1&appid=${API_KEY}`;
@@ -98,6 +103,7 @@ class App extends Component {
         })
         .then((res) => {
           let locationCity = res[0].name + ', ' + res[0].country
+          console.log(res)
           this.setState({
             locationState: locationCity
           })

@@ -7,7 +7,7 @@ const Mainside = ({
   icon,
   locationState,
   onChangeEvent,
-  onSubmit,
+  onSubmit
 }) => {
   const date = new Date();
   const hoursnow = date.toLocaleTimeString();
@@ -28,7 +28,7 @@ const Mainside = ({
     <div className="container justify-content-center align-items-center align-items-center">
       <div className="formData ">
         <form onSubmit={onSubmit} className="input-group input-group-lg mt-5 ">
-          <label className="p-2" for="fname">
+          <label className="p-2" htmlFor="fname">
             Your city is:{" "}
           </label>
           <input
@@ -50,14 +50,14 @@ const Mainside = ({
               <p className="col-1"> {daynow} </p>
               <p className="col-1"> {datenow} </p>
             </div>
-            { weather.map((item) => {
+            { weather.map((item, index) => {
               return (
                 <div
                   className="main-items d-flex flex-row align-items-center"
-                  key={item.id}
+                  key={index}
                 >
                   <div>
-                    <img className="photo" alt="weather" src={icon} />
+                    <img  className="photo" alt="weather" src={icon} />
                     <p className="h3"> {item[0].main} </p>
                   </div>
                   <div className="temp">
@@ -69,11 +69,10 @@ const Mainside = ({
                 </div>
               );
             })}
-            { wind.map((item) => {
+            { wind.map((item, index) => {
               return (
-                <div
+                <div key = {index}
                   className="second-data mt-5 d-flex flex-row align-items-center"
-                  key={item.id}
                 >
                   <div>
                     <p> Humidity </p>
