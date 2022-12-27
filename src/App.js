@@ -34,12 +34,14 @@ class App extends Component {
     e.preventDefault();
     let cityName = this.state.locationState;
     this.handleLocation(cityName);
+    this.handleForecastLocation(cityName)
   }
 
   handleForecastLocation = () => {
+    let cityname = this.state.locationState
     const url =
     "https://api.openweathermap.org/data/2.5/forecast?q=" +
-      this.state.locationState +
+      cityname +
       "&appid=" +
       this.state.key + 
       "&units=metric";
@@ -49,11 +51,6 @@ class App extends Component {
         let forescastday = this.state.dataForecast.concat([res.list])
         let filterforecast = forescastday.filter((filtred) => filtred === res.list)
         console.log(filterforecast)
-        // #1 Set to Icon Forecast Only Item property.
-            // #1 SetState only for item
-        // #2 Move iconUrl to SecondSide for each elements
-        // #3 Display Data For each card in Secondside component.
-        // const iconurl = "http://openweathermap.org/img/w/" + iconName + ".png";
         this.setState({
           dataForecast: filterforecast,
         })
