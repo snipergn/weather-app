@@ -43,7 +43,8 @@ class App extends Component {
       cityname +
       "&appid=" +
       key + 
-      "&units=metric";
+      "&units=metric"
+      + "&lang=ro";
       fetch(url)
       .then((res) => res.json())
       .then((res) => {
@@ -63,7 +64,8 @@ class App extends Component {
       this.state.locationState +
       "&appid=" +
       key +
-      "&units=metric";
+      "&units=metric"
+      + "&lang=ro";
     fetch(url)
       .then((res) => res.json())
       .then((res) => {
@@ -93,7 +95,7 @@ class App extends Component {
       const API_KEY ='fd3b081fa5f1791533d9fa25f99be333';
       const lat = position.coords.latitude;
       const lng = position.coords.longitude;
-      const url = `http://api.openweathermap.org/geo/1.0/reverse?lat=${lat}&lon=${lng}&limit=1&appid=${API_KEY}`;
+      const url = `http://api.openweathermap.org/geo/1.0/reverse?lat=${lat}&lon=${lng}&limit=1&appid=${API_KEY}&lang=ro"`;
       fetch(url)
         .then((res) => {
           return res.json();
@@ -128,7 +130,6 @@ class App extends Component {
         />
         <Secondside
         dataForecast = {this.state.dataForecast}
-
         />
       </div>
     );

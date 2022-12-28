@@ -1,16 +1,81 @@
 .flex-row {
-	gap: 40px;
+	gap:5rem;
+	
 }
+.main-items {
+	margin-top: 2rem;
+}
+
 .photo {
-	width: 100px;
-	height: 100px;
+	width: 125px;
+	height: 125px;
 }
 
-.temp {
-	padding-top: 50px;
+.margin-top {
+	margin-top: 4rem
 }
 
-.container {
+.wind-speed {
+	color: gray;
+}
+.wind-speed, .humidity {
+	margin-top: 20px;
+	font-family: 'Nunito', sans-serif;
+	font-weight: 500;
+
+}
+
+.hum, .wind {
+	font-family: 'Nunito', sans-serif;
+	font-weight: 700;
+
+}
+
+
+.inputlabel {
+	margin-right: 10px;
+	font-weight: 700;
+	font-size: 20px;
+	font-family: 'Nunito', sans-serif;}
+
+.temperature{
+	font-size: 4rem;
+	margin-top: 10px;
+	font-family: 'Nunito', sans-serif;
+	font-weight: 700;
+
+}
+.temperature, .photo {
+	margin-left: 3rem;
+}
+.inputdata {
+	font-size: 18px;
+	border: none; /* <-- This thing here */
+	border: solid 1px rgb(177, 177, 177);
+	border-radius: 20px;
+	font-family: 'Nunito', sans-serif;
+	font-weight: 500;
+
+}
+
+.dataNow {
+	font-size: 18px;
+	margin-bottom: 3rem;
+	font-family: 'Nunito', sans-serif;
+}
+.main-clear {
+	font-size: 50px;
+	margin-left: 7rem;
+	margin-top: -30px;
+	font-family: 'Nunito', sans-serif;
+	font-weight: 700;
+}
+
+.hum {
 	position: relative;
-	top: 90px;
+	top: 14px
+}
+.hum-speed-con {
+	margin-top: 3rem;
+	margin-left: 2rem;
 }

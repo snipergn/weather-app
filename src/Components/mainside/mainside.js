@@ -7,7 +7,7 @@ const Mainside = ({
   icon,
   locationState,
   onChangeEvent,
-  onSubmit
+  onSubmit,
 }) => {
   const date = new Date();
   const hoursnow = date.toLocaleTimeString();
@@ -25,62 +25,55 @@ const Mainside = ({
   const temperature = Math.round(data.map((item) => item.temp));
 
   return (
-    <div className="container justify-content-center align-items-center align-items-center">
-      <div className="formData ">
-        <form onSubmit={onSubmit} className="input-group input-group-lg mt-5 ">
-          <label className="p-2" htmlFor="fname">
-            Your city is:{" "}
+    <div className="container margin-top h-100">
+      <div className="formData  ">
+        <form onSubmit={onSubmit} className=" input-group-lg mt-5 ">
+          <label className="p-3 inputlabel " htmlFor="fname">
+            Your city: {" "}
           </label>
           <input
-            className="p-2"
+            className="p-3 inputdata"
             type="text"
             id="fname"
             name="fname"
             onChange={onChangeEvent}
             value={locationState}
           />
-          <input type="submit" value="Submit" />
         </form>
       </div>
       {data.map((main, index) => {
         return (
           <div key={index}>
-            <div className="d-flex mt-5 ">
-              <p className="col-1">{hoursnow}</p>
-              <p className="col-1"> {daynow} </p>
-              <p className="col-1"> {datenow} </p>
+            <div className=" mt-5">
+              <p className="dataNow">{hoursnow}, {daynow}, {datenow} </p>
             </div>
-            { weather.map((item, index) => {
+            {weather.map((item, index) => {
               return (
                 <div
-                  className="main-items d-flex flex-row align-items-center"
+                  className="main-items "
                   key={index}
                 >
-                  <div>
-                    <img  className="photo" alt="weather" src={icon} />
-                    <p className="h3"> {item[0].main} </p>
+                  <div className="d-flex">
+                    <img className="photo" alt="weather" src={icon} />
+                    <p className="temperature">{temperature}°C</p>
                   </div>
-                  <div className="temp">
-                    <p className="h">
-                      temperature <br />
-                    </p>
-                    <p className="h3">{temperature}°C</p>
-                  </div>
+                  <br/>
+                  <p className="h3 main-clear"> {item[0].main} </p>
                 </div>
               );
             })}
-            { wind.map((item, index) => {
+            {wind.map((item, index) => {
               return (
-                <div key = {index}
-                  className="second-data mt-5 d-flex flex-row align-items-center"
+                <div key={index}
+                  className="hum-speed-con d-flex flex-row align-items-center"
                 >
                   <div>
-                    <p> Humidity </p>
-                    <span className="h3"> {main.humidity}%</span>
+                    <p className="humidity">Humidity </p>
+                    <span className="h3 hum"> {main.humidity}%</span>
                   </div>
                   <div>
-                    <p> Wind Speed </p>
-                    <span className="h3">{item.speed} km/h</span>
+                    <p className="wind-speed"> Wind Speed </p>
+                    <span className="h3 wind">{item.speed} km/h</span>
                   </div>
                 </div>
               );
