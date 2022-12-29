@@ -14,6 +14,8 @@ class App extends Component {
       icon: "",
       iconForecast: "",
       locationState: "Bucharest",
+      lat: '',
+      long: ''
     };
 
     this.onSubmitHandler = this.onSubmitHandler.bind(this);
@@ -21,6 +23,7 @@ class App extends Component {
     this.onChangeHandler = this.onChangeHandler.bind(this);
     this.handleGeolocation = this.handleGeolocation.bind(this);
     this.handleForecastLocation = this.handleForecastLocation.bind(this);
+    this.handleGeolocationCity = this.handleGeolocationCity.bind(this);
   }
 
   onChangeHandler(event) {
@@ -33,8 +36,27 @@ class App extends Component {
     e.preventDefault();
     this.handleLocation();
     this.handleForecastLocation()
+    this.handleGeolocationCity();
   }
 
+  handleGeolocationCity = () => {
+    const key = 'fd3b081fa5f1791533d9fa25f99be333';
+    let cityname = this.state.locationState
+    const url = `http://api.openweathermap.org/geo/1.0/direct?q=${cityname}&limit=5&appid=${key}`;
+    fetch(url)
+    .then((res) => res.json())
+    .then((res) => 
+    {   
+      let data = res[Object.keys(res)[0]];
+      this.setState({
+        lat: data.lat,
+        long: data.lon
+      })
+      console.log(this.state.lat, this.state.long)
+      
+    } )
+
+  }
   handleForecastLocation = () => {
     const key = 'fd3b081fa5f1791533d9fa25f99be333'
     let cityname = this.state.locationState
@@ -49,10 +71,12 @@ class App extends Component {
       .then((res) => res.json())
       .then((res) => {
         let forescastday = this.state.dataForecast.concat([res.list])
-        let filterforecast = forescastday.filter((filtred) => filtred === res.list)
-        console.log(filterforecast)
+        let filterforecast = forescastday.filter(filter => filter === res.list)
+        let data = filterforecast[Object.keys(filterforecast)[0]];
+
+
         this.setState({
-          dataForecast: filterforecast,
+          dataForecast: data
         })
       })
   }
@@ -114,6 +138,7 @@ class App extends Component {
     this.handleLocation();
     this.handleGeolocation();
     this.handleForecastLocation();
+    this.handleGeolocationCity();
   }
 
   render() {
@@ -129,8 +154,9 @@ class App extends Component {
           onChangeEvent={this.onChangeHandler.bind(this)}
         />
         <Secondside
-        dataForecast = {this.state.dataForecast}
+          dataForecast = {this.state.dataForecast}
         />
+        
       </div>
     );
   }

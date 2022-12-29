@@ -14,14 +14,6 @@
     font-weight: 700;
 }
 
-.container-second {
-    gap: 15px;
-    margin-right: 5rem;
-    position: relative;
-    bottom: 12rem;
-    font-family: 'Nunito', sans-serif;
-
-}
 
 .card-body {
     text-align: center;
@@ -40,4 +32,7 @@
 .humidity-item {
     font-weight: 500;
 }
-
+.section {
+    display: flexbox;
+    flex-direction: row;
+}

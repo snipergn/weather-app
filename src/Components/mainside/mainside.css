@@ -44,11 +44,11 @@
 	font-family: 'Nunito', sans-serif;
 	font-weight: 700;
 	position: relative;
-	right: 3rem;
+	right: 1rem;
 
 }
 .temperature, .photo {
-	margin-left: 3rem;
+	margin-left: 1rem;
 }
 .inputdata {
 	font-size: 18px;
