@@ -76,8 +76,15 @@ class App extends Component {
 
 
         this.setState({
+<<<<<<< HEAD
           dataForecast: data
         })
+=======
+          data: filtercurrent,
+          dataForecast: objectkey,
+        });
+        console.log(filtercurrent);
+>>>>>>> parent of 2e7b1987 (new commit)
       })
   }
 
