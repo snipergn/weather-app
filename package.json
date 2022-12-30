@@ -1,6 +1,5 @@
 {
   "name": "weather-app",
-  "homepage": "https://snipergn.github.io/weather-app/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -8,17 +7,10 @@
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "chart.js": "^4.1.1",
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
+
     "gh-pages": "^4.0.0",
     "moment": "^2.29.4",
-=======
->>>>>>> parent of dbf83924 (new commit)
-=======
->>>>>>> parent of dbf83924 (new commit)
-=======
->>>>>>> parent of dbf83924 (new commit)
+
     "react": "^18.2.0",
     "react-bootstrap": "^2.7.0",
     "react-chartjs-2": "^5.1.0",
