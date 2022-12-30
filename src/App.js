@@ -54,7 +54,6 @@ class App extends Component {
           data: filtercurrent,
           dataForecast: objectkey,
         });
-        console.log(filtercurrent);
       })
       .catch((error) =>
         console.log(error, "Some error here with API Location")
