@@ -15,17 +15,17 @@
 	margin-top: 4rem
 }
 
-.wind-speed {
+.wind-speed, .feels-like {
 	color: gray;
 }
-.wind-speed, .humidity {
+.wind-speed, .humidity, .feels-like {
 	margin-top: 20px;
 	font-family: 'Nunito', sans-serif;
 	font-weight: 500;
 
 }
 
-.hum, .wind {
+.hum, .wind, .feels-like {
 	font-family: 'Nunito', sans-serif;
 	font-weight: 700;
 

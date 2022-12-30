@@ -32,7 +32,10 @@
 .humidity-item {
     font-weight: 500;
 }
-.section {
-    display: flexbox;
-    flex-direction: row;
+.card {
+    margin-bottom: 30px;
 }
+
+
+
+
