@@ -18,8 +18,8 @@ class App extends Component {
     this.handleLocation = this.handleLocation.bind(this);
     this.onChangeHandler = this.onChangeHandler.bind(this);
     this.onLocationState = this.onLocationState.bind(this);
-    this.handleGeolocation = this.handleGeolocation.bind(this);
     this.onLocationState = this.onLocationState.bind(this);
+    this.handleGeolocation = this.handleGeolocation.bind(this);
   }
 
   onChangeHandler(event) {
@@ -30,15 +30,16 @@ class App extends Component {
 
   onSubmitHandler(e) {
     e.preventDefault();
-    this.handleLocation();
     this.onLocationState();
+    this.handleLocation();
   }
 
   onLocationState = () => {
     let lat = this.state.lat;
     let lon = this.state.lon;
     const key = "fd3b081fa5f1791533d9fa25f99be333";
-    const urlfor = `https://api.openweathermap.org/data/3.0/onecall?lat=${lat}&lon=${lon}&exclude=hourly,minutely&appid=${key}&units=metric`;
+        const urlfor = "https://api.openweathermap.org/data/3.0/onecall?lat=" + 
+        lat + "&lon=" + lon + "&exclude=hourly,minutely&appid=" + key + "&units=metric";
     fetch(urlfor)
       .then((res) => res.json())
       .then((res) => {
@@ -106,9 +107,9 @@ class App extends Component {
   };
 
   componentDidMount() {
+    this.onLocationState();
     this.handleLocation();
     this.handleGeolocation();
-    this.onLocationState();
   }
 
   render() {

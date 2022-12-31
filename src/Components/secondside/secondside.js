@@ -4,6 +4,7 @@ const Secondside = ({ dataForecast }) => {
   return (
     <div className="d-flex flex-sm-row row container-fluid mt-5 mr-5  ">
       {dataForecast.map((item, index) => {
+        const update = new Date(item.dt * 1000).toLocaleDateString()
         return (
           <div
             key={index}
