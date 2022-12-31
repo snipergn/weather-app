@@ -65,7 +65,7 @@ class App extends Component {
   handleLocation = () => {
     const key = "fd3b081fa5f1791533d9fa25f99be333";
     const url =
-      "http://api.openweathermap.org/data/2.5/weather?q=" +
+      "https://api.openweathermap.org/data/2.5/weather?q=" +
       this.state.locationState +
       "&appid=" +
       key +
@@ -89,7 +89,7 @@ class App extends Component {
       const API_KEY = "fd3b081fa5f1791533d9fa25f99be333";
       const lat = position.coords.latitude;
       const lng = position.coords.longitude;
-      const url = `http://api.openweathermap.org/geo/1.0/reverse?lat=${lat}&lon=${lng}&limit=1&appid=${API_KEY}`;
+      const url = `https://api.openweathermap.org/geo/1.0/reverse?lat=${lat}&lon=${lng}&limit=1&appid=${API_KEY}`;
       fetch(url)
         .then((res) => {
           return res.json();

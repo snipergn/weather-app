@@ -51,7 +51,7 @@ const Mainside = ({ data, locationState, onChangeEvent, onSubmit }) => {
                   <img
                     className="photo"
                     alt="weather"
-                    src={`http://openweathermap.org/img/w/${item.weather[0].icon}.png`}
+                    src={`https://openweathermap.org/img/w/${item.weather[0].icon}.png`}
                   />
                   <p className="temperature">{Math.round(item.temp)}°C</p>
                 </div>

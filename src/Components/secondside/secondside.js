@@ -14,7 +14,7 @@ const Secondside = ({ dataForecast }) => {
               <p className="mx-auto day-title">{update}</p>
               <img
                 className="card-img-top mx-auto "
-                src={`http://openweathermap.org/img/w/${item.weather[0].icon}.png`}
+                src={`https://openweathermap.org/img/w/${item.weather[0].icon}.png`}
                 alt="Card cap"
               />
               <div className="card-body ">
