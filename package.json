@@ -1,4 +1,5 @@
-{
+{   
+  "homepage": "https://snipergn.github.io/weather-app/public/index.html",
   "name": "weather-app",
   "version": "0.1.0",
   "private": true,
