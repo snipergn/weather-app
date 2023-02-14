@@ -37,7 +37,7 @@ class App extends Component {
   onLocationState = () => {
     let lat = this.state.lat;
     let lon = this.state.lon;
-    const key = process.env.KEY_API;
+    const key = 'fd3b081fa5f1791533d9fa25f99be333';
         const urlfor = "https://api.openweathermap.org/data/3.0/onecall?lat=" + 
         lat + "&lon=" + lon + "&exclude=hourly,minutely&appid=" + key + "&units=metric";
     fetch(urlfor)
@@ -63,7 +63,7 @@ class App extends Component {
   };
 
   handleLocation = () => {
-    const key = process.env.KEY_API;
+    const key = 'fd3b081fa5f1791533d9fa25f99be333';
     const url =
       "https://api.openweathermap.org/data/2.5/weather?q=" +
       this.state.locationState +
@@ -86,7 +86,7 @@ class App extends Component {
   };
   handleGeolocation = () => {
     navigator.geolocation.getCurrentPosition((position) => {
-      const API_KEY = process.env.KEY_API;
+      const API_KEY = 'fd3b081fa5f1791533d9fa25f99be333';
       const lat = position.coords.latitude;
       const lng = position.coords.longitude;
       const url = `https://api.openweathermap.org/geo/1.0/reverse?lat=${lat}&lon=${lng}&limit=1&appid=${API_KEY}`;
