@@ -35,7 +35,7 @@ class App extends Component {
   onLocationState = () => {
     let lat = this.state.lat;
     let lon = this.state.lon;
-    const key = process.env.API;
+    const key = "fd3b081fa5f1791533d9fa25f99be333";
     const urlfor =
       "https://api.openweathermap.org/data/3.0/onecall?lat=" +
       lat +
