@@ -59,10 +59,9 @@ class App extends Component {
           data: filtercurrent,
           dataForecast: objectkey,
         });
-        console.log(filtercurrent);
       })
       .catch((error) =>
-        console.log(error, "Some error here with API Location")
+        console.log("Some error here with API Location")
       );
     navigator.geolocation.getCurrentPosition((position) => {
       const lat = position.coords.latitude;
@@ -99,7 +98,7 @@ class App extends Component {
         });
       })
       .catch((error) =>
-        console.log(error, "Some error here with API Location")
+        console.log("Some error here with API Location")
       );
   };
 
