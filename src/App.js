@@ -15,11 +15,9 @@ class App extends Component {
     };
 
     this.onSubmitHandler = this.onSubmitHandler.bind(this);
-    this.handleLocation = this.handleLocation.bind(this);
     this.onChangeHandler = this.onChangeHandler.bind(this);
     this.onLocationState = this.onLocationState.bind(this);
     this.onLocationState = this.onLocationState.bind(this);
-    this.handleGeolocation = this.handleGeolocation.bind(this);
   }
 
   onChangeHandler(event) {
@@ -37,9 +35,15 @@ class App extends Component {
   onLocationState = () => {
     let lat = this.state.lat;
     let lon = this.state.lon;
-    const key = "fd3b081fa5f1791533d9fa25f99be333";
-        const urlfor = "https://api.openweathermap.org/data/3.0/onecall?lat=" + 
-        lat + "&lon=" + lon + "&exclude=hourly,minutely&appid=" + key + "&units=metric";
+    const key = process.env.API_KEY;
+    const urlfor =
+      "https://api.openweathermap.org/data/3.0/onecall?lat=" +
+      lat +
+      "&lon=" +
+      lon +
+      "&exclude=hourly,minutely&appid=" +
+      key +
+      "&units=metric";
     fetch(urlfor)
       .then((res) => res.json())
       .then((res) => {
@@ -60,10 +64,24 @@ class App extends Component {
       .catch((error) =>
         console.log(error, "Some error here with API Location")
       );
-  };
-
-  handleLocation = () => {
-    const key = "fd3b081fa5f1791533d9fa25f99be333";
+    navigator.geolocation.getCurrentPosition((position) => {
+      const lat = position.coords.latitude;
+      const lng = position.coords.longitude;
+      const url = `https://api.openweathermap.org/geo/1.0/reverse?lat=${lat}&lon=${lng}&limit=1&appid=${key}`;
+      fetch(url)
+        .then((res) => {
+          return res.json();
+        })
+        .then((res) => {
+          let locationCity = res[0].name + ", " + res[0].country;
+          this.setState({
+            locationState: locationCity,
+          });
+        })
+        .catch((error) =>
+          console.log(error, "Some error here with Geolocation Finder")
+        );
+    });
     const url =
       "https://api.openweathermap.org/data/2.5/weather?q=" +
       this.state.locationState +
@@ -84,32 +102,9 @@ class App extends Component {
         console.log(error, "Some error here with API Location")
       );
   };
-  handleGeolocation = () => {
-    navigator.geolocation.getCurrentPosition((position) => {
-      const API_KEY = "fd3b081fa5f1791533d9fa25f99be333";
-      const lat = position.coords.latitude;
-      const lng = position.coords.longitude;
-      const url = `https://api.openweathermap.org/geo/1.0/reverse?lat=${lat}&lon=${lng}&limit=1&appid=${API_KEY}`;
-      fetch(url)
-        .then((res) => {
-          return res.json();
-        })
-        .then((res) => {
-          let locationCity = res[0].name + ", " + res[0].country;
-          this.setState({
-            locationState: locationCity,
-          });
-        })
-        .catch((error) =>
-          console.log(error, "Some error here with Geolocation Finder")
-        );
-    });
-  };
 
   componentDidMount() {
     this.onLocationState();
-    this.handleLocation();
-    this.handleGeolocation();
   }
 
   render() {
